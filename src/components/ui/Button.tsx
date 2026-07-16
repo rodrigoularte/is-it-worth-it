@@ -6,7 +6,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const baseClasses =
-  "flex items-center justify-center px-4 py-3 font-medium text-sm gap-2 cursor-pointer transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-80";
+  "flex items-center justify-center px-3 sm:px-4 py-2 sm:py-3 font-medium text-xs sm:text-sm gap-2 cursor-pointer transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-80";
 
 const variantClasses = {
   primary: "bg-primary text-primary-foreground font-semibold rounded-xl",
