@@ -1,9 +1,13 @@
-import { ChartLine, Clock, Sun, Wallet } from "lucide-react";
+import { ChartLine, Clock, Moon, Sun, Wallet } from "lucide-react";
 import { Link } from "react-router";
+
+import { useTheme } from "@/hooks/useTheme";
 
 import Button from "./Button";
 
 export default function Header() {
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <header className="border-border w-full border-b px-3 py-4 sm:px-6">
       <nav className="flex items-center justify-between">
@@ -25,7 +29,12 @@ export default function Header() {
             </Button>
           </div>
           <div className="border-l-border border-l pl-1">
-            <Button variant="ghost" icon={Sun} />
+            <Button
+              aria-label={`Mudar para tema ${theme === "light" ? "escuro" : "claro"}`}
+              variant="ghost"
+              icon={theme === "light" ? Moon : Sun}
+              onClick={toggleTheme}
+            />
           </div>
         </div>
       </nav>
