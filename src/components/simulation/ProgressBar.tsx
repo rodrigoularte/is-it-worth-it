@@ -9,7 +9,7 @@ export default function ProgressBar({
   const progress = (currentStep / totalSteps) * 100;
 
   return (
-    <div className="flex w-full flex-col gap-2">
+    <div className="mb-6 flex w-full flex-col gap-2">
       <p className="text-primary text-sm sm:text-base">
         Passo {currentStep} de {totalSteps}
       </p>
