@@ -1,23 +1,41 @@
-import { ShoppingCart } from "lucide-react";
+import { useState } from "react";
+
+import { formSteps } from "@/data/simulation";
 
 import { FormStep } from "./FormStep";
 import ProgressBar from "./ProgressBar";
 
 export default function SimulationForm() {
-  const stepTitle = "Já coloquei no carrinho";
-  const stepQuestion = "O que você quer comprar e quanto custa?";
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+
+  const totalSteps = formSteps.length;
+  const currentStep = formSteps[currentStepIndex];
+
+  const handleNextStep = () => {
+    if (currentStepIndex + 1 > totalSteps - 1) {
+      return;
+    }
+
+    setCurrentStepIndex((prevIndex) => prevIndex + 1);
+  };
+
+  const handlePreviousStep = () => {
+    if (currentStepIndex === 0) {
+      return;
+    }
+
+    setCurrentStepIndex((prevIndex) => prevIndex - 1);
+  };
 
   return (
     <div className="w-full">
-      <ProgressBar currentStep={1} totalSteps={5} />
+      <ProgressBar currentStep={currentStepIndex + 1} totalSteps={totalSteps} />
       <FormStep
-        icon={ShoppingCart}
-        stepTitle={stepTitle}
-        stepQuestion={stepQuestion}
-        inputProps={{
-          type: "text",
-          placeholder: "ex: Bicicleta, R$ 500,00",
-        }}
+        key={currentStep.id}
+        {...currentStep}
+        onBack={handlePreviousStep}
+        onNext={handleNextStep}
+        hideBackButton={currentStepIndex === 0}
       />
     </div>
   );
