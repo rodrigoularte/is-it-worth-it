@@ -57,6 +57,7 @@ export const formSteps: FormStepProps[] = [
       placeholder: "ex: 3.000,00",
       prefix: "R$",
       maxLength: 12,
+      isCurrency: true,
     },
   },
   {
@@ -70,6 +71,7 @@ export const formSteps: FormStepProps[] = [
       placeholder: "ex: 2.000,00",
       prefix: "R$",
       maxLength: 12,
+      isCurrency: true,
     },
   },
   {
@@ -105,6 +107,7 @@ export const formSteps: FormStepProps[] = [
       placeholder: "ex: 300,00",
       prefix: "R$",
       maxLength: 12,
+      isCurrency: true,
     },
     submitButtonProps: {
       label: "Gerar simulação",

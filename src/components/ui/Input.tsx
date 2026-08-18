@@ -1,6 +1,7 @@
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   prefix?: string;
   suffix?: string;
+  isCurrency?: boolean;
 }
 
 export default function Input({ prefix, suffix, ...rest }: InputProps) {
