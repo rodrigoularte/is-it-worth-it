@@ -12,6 +12,7 @@ export interface FormStepProps {
   stepTitle: string;
   stepQuestion: string;
   inputProps: InputProps;
+  currentValue: string;
   submitButtonProps?: {
     label: string;
     Icon: LucideIcon;
@@ -21,7 +22,7 @@ export interface FormStepProps {
 interface ActionButtonProps {
   hideBackButton: boolean;
   onBack: () => void;
-  onNext: () => void;
+  onNext: (value: string) => void;
 }
 
 export function FormStep({
@@ -29,12 +30,13 @@ export function FormStep({
   stepTitle,
   stepQuestion,
   inputProps,
+  currentValue,
   submitButtonProps,
   hideBackButton,
   onBack,
   onNext,
 }: FormStepProps & ActionButtonProps) {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(currentValue);
 
   const handleInputValueChange = (value: string) => {
     if (inputProps.isCurrency) {
@@ -52,7 +54,7 @@ export function FormStep({
       return;
     }
 
-    onNext();
+    onNext(inputValue);
   };
 
   return (

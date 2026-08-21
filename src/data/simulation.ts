@@ -1,7 +1,6 @@
 import {
+  CircleDollarSign,
   Clock,
-  CreditCard,
-  HelpCircle,
   PiggyBank,
   Receipt,
   ShoppingCart,
@@ -12,41 +11,54 @@ import {
 
 import type { FormStepProps } from "@/components/simulation/FormStep";
 
-export const formSteps: FormStepProps[] = [
+export const formSteps = [
   {
     id: "purchase",
     icon: ShoppingCart,
     stepTitle: "Já coloquei no carrinho",
-    stepQuestion: "O que você quer comprar e quanto custa?",
+    stepQuestion: "O que você quer comprar?",
     inputProps: {
       type: "text",
-      placeholder: "ex: Bicicleta, R$ 500,00",
+      placeholder: "ex: Bicicleta",
       maxLength: 100,
     },
   },
   {
-    id: "payment",
-    icon: CreditCard,
-    stepTitle: "Pagamento",
-    stepQuestion: "Como pretende pagar esta compra?",
+    id: "purchaseValue",
+    icon: CircleDollarSign,
+    stepTitle: "Custo",
+    stepQuestion: "Qual é o valor da compra?",
     inputProps: {
       type: "text",
-      placeholder: "ex: À vista, Parcelado em 6x",
-      maxLength: 50,
+      placeholder: "ex: 500,00",
+      prefix: "R$",
+      maxLength: 12,
+      isCurrency: true,
     },
   },
-  {
-    id: "motivation",
-    icon: HelpCircle,
-    stepTitle: "Motivação",
-    stepQuestion: "Qual a real necessidade desta compra agora?",
-    inputProps: {
-      type: "text",
-      placeholder:
-        "ex: Necessidade real, Desejo do momento, ou Estou na dúvida",
-      maxLength: 50,
-    },
-  },
+  // {
+  //   id: "payment",
+  //   icon: CreditCard,
+  //   stepTitle: "Pagamento",
+  //   stepQuestion: "Como pretende pagar esta compra?",
+  //   inputProps: {
+  //     type: "text",
+  //     placeholder: "ex: À vista, Parcelado em 6x",
+  //     maxLength: 50,
+  //   },
+  // },
+  // {
+  //   id: "motivation",
+  //   icon: HelpCircle,
+  //   stepTitle: "Motivação",
+  //   stepQuestion: "Qual a real necessidade desta compra agora?",
+  //   inputProps: {
+  //     type: "text",
+  //     placeholder:
+  //       "ex: Necessidade real, Desejo do momento, ou Estou na dúvida",
+  //     maxLength: 50,
+  //   },
+  // },
   {
     id: "income",
     icon: Wallet,
@@ -75,7 +87,7 @@ export const formSteps: FormStepProps[] = [
     },
   },
   {
-    id: "work-hours",
+    id: "workHours",
     icon: Clock,
     stepTitle: "Jornada de Trabalho",
     stepQuestion: "Quantas horas você trabalha por semana?",
@@ -90,11 +102,24 @@ export const formSteps: FormStepProps[] = [
     id: "goal",
     icon: Target,
     stepTitle: "Sua Meta",
-    stepQuestion: "Qual o seu maior sonho ou meta atual e quanto ele custa?",
+    stepQuestion: "Qual o seu maior sonho ou meta atual?",
     inputProps: {
       type: "text",
-      placeholder: "ex: Viagem para o Japão, R$ 15.000",
+      placeholder: "ex: Viagem para o Japão",
       maxLength: 100,
+    },
+  },
+  {
+    id: "goalValue",
+    icon: CircleDollarSign,
+    stepTitle: "Sua Meta",
+    stepQuestion: "Quanto custa realizar esse sonho ou meta?",
+    inputProps: {
+      type: "text",
+      placeholder: "ex: 15.000",
+      prefix: "R$",
+      maxLength: 12,
+      isCurrency: true,
     },
   },
   {
@@ -114,4 +139,9 @@ export const formSteps: FormStepProps[] = [
       Icon: Sparkles,
     },
   },
-];
+] satisfies FormStepProps[];
+
+export type SimulationFormData = Record<
+  (typeof formSteps)[number]["id"],
+  string
+>;
