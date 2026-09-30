@@ -1,33 +1,44 @@
 import {
   ChartPie,
+  CircleAlert,
   Goal,
   PiggyBank,
   Receipt,
   ShoppingCart,
   Wallet,
 } from "lucide-react";
+import { Link, useParams } from "react-router";
 
 import Card from "@/components/simulationResults/Card";
+import Button from "@/components/ui/Button";
 import PageHero from "@/components/ui/PageHero";
-import type { SimulationFormData } from "@/data/simulation";
+import { useSimulationStorage } from "@/hooks/useSimulationStorage";
 import { addCurrencySymbol, calculatePurchaseImpact } from "@/utils/currency";
 
-const mock = {
-  purchase: "Geladeira",
-  purchaseValue: "2.100,00",
-  //------------------------
-  goal: "Viagem para o Japão",
-  goalValue: "15.000,00",
-  //------------------------
-  workHours: "40",
-  //------------------------
-  income: "5.000,00",
-  expenses: "2.350,00",
-  savings: "500,00",
-};
-
 export default function SimulationResultPage() {
-  const data: SimulationFormData = mock;
+  const { id } = useParams<{ id: string }>();
+
+  const { getFormData } = useSimulationStorage();
+
+  const data = id ? getFormData(id) : null;
+
+  if (!data) {
+    return (
+      <main className="mx-auto flex h-full w-full max-w-6xl flex-1 flex-col justify-center px-4 py-10 sm:py-12">
+        <span className="text-primary mx-auto">
+          <CircleAlert size={32} />
+        </span>
+        <p className="mx-auto mt-4 text-xl font-semibold">
+          Simulação não encontrada
+        </p>
+        <div className="mx-auto mt-10">
+          <Button variant="primary">
+            <Link to="/"> Comece uma nova simulação</Link>
+          </Button>
+        </div>
+      </main>
+    );
+  }
 
   const { percentOfFreeIncome } = calculatePurchaseImpact(data);
 

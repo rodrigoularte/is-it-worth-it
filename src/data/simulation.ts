@@ -145,3 +145,5 @@ export type SimulationFormData = Record<
   (typeof formSteps)[number]["id"],
   string
 >;
+
+export type SimulationRecord = SimulationFormData & { id: string };

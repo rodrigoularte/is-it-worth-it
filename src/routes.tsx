@@ -9,7 +9,7 @@ export default function AppRoutes() {
     <Routes>
       <Route path="/" element={<Root />}>
         <Route index element={<SimulationFormPage />} />
-        <Route path="/result" element={<SimulationResultPage />} />
+        <Route path="/result/:id" element={<SimulationResultPage />} />
       </Route>
     </Routes>
   );
