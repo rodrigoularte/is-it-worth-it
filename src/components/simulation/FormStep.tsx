@@ -12,7 +12,7 @@ export interface FormStepProps {
   stepTitle: string;
   stepQuestion: string;
   inputProps: InputProps;
-  currentValue: string;
+  currentValue?: string;
   submitButtonProps?: {
     label: string;
     Icon: LucideIcon;
