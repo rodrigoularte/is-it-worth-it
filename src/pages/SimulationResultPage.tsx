@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { Link, useParams } from "react-router";
 
+import { AIInsightCard } from "@/components/simulationResults/AIInsightCard";
 import Card from "@/components/simulationResults/Card";
 import Button from "@/components/ui/Button";
 import PageHero from "@/components/ui/PageHero";
@@ -69,13 +70,7 @@ export default function SimulationResultPage() {
             subtitle="do que sobra no seu mês!"
             variant="primary"
           />
-          <div className="order-2 col-span-1 row-span-2 h-full lg:order-1 lg:col-span-2">
-            <div className="bg-card h-full rounded-2xl p-6 shadow-[4px_4px_18px_0px_rgba(0,0,0,0.2)]">
-              <h2 className="text-foreground mb-1 text-2xl font-semibold sm:text-3xl">
-                Vale a pena?
-              </h2>
-            </div>
-          </div>
+          <AIInsightCard simulationId={data.id} />
           <div className="bg-card order-1 row-span-2 rounded-2xl p-6 shadow-[4px_4px_18px_0px_rgba(0,0,0,0.2)] lg:order-2">
             <h2 className="text-foreground mb-1 text-2xl font-semibold sm:text-3xl">
               Resumo
