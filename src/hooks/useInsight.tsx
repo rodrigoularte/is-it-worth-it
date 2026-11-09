@@ -1,18 +1,21 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { buildAIPrompt } from "@/data/aiPrompt";
+import type { SimulationRecord } from "@/data/simulation";
 import { getInsight, type InsightData } from "@/services/aiService";
 
 import { useSimulationStorage } from "./useSimulationStorage";
 
 export const useInsight = (id: string) => {
   const isRequestPending = useRef(false);
+  const { getFormData, updateSimulation } = useSimulationStorage();
 
-  const [insight, setInsight] = useState<InsightData | null>(null);
+  const [insight, setInsight] = useState<InsightData | null>(() => {
+    const simulation = getFormData(id);
+    return simulation?.insight || null;
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  const { getFormData } = useSimulationStorage();
 
   const fetchInsight = useCallback(
     async (simulationId: string) => {
@@ -32,7 +35,11 @@ export const useInsight = (id: string) => {
         const prompt = buildAIPrompt(simulation);
         const data = await getInsight(prompt);
         setInsight(data);
-        return data;
+
+        updateSimulation(simulationId, {
+          ...simulation,
+          insight: data,
+        } as SimulationRecord);
       } catch {
         setError("Erro ao gerar a simulação. Tente novamente.");
       } finally {
@@ -40,7 +47,7 @@ export const useInsight = (id: string) => {
         setIsLoading(false);
       }
     },
-    [getFormData],
+    [getFormData, updateSimulation],
   );
 
   useEffect(() => {
