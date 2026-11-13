@@ -11,10 +11,10 @@ const RESPONSE_SCHEMA = `{
     "content": "<Um raio-x financeiro que mostra o peso real desse gasto sobre o dinheiro que efetivamente sobra no mês e o que isso representa para a saúde financeira>"
   },
   "suggestions": {
-    "items": ["<Alternativas práticas e planos de ação, como planejar a compra para o mês seguinte ou buscar opções mais em conta>"]
+    "items": ["<Pelo menos 4 alternativas práticas e planos de ação, como planejar a compra para o mês seguinte ou buscar opções mais em conta>"]
   },
   "investment": {
-    "items": ["<A demonstração do "custo de oportunidade", revelando o quanto esse dinheiro trabalharia a favor do usuário se estivesse rendendo juros, com foco em atingir a meta>"]
+    "items": ["<A demonstração do "custo de oportunidade", revelando pelo menos 3 dicas do quanto esse dinheiro trabalharia a favor do usuário se estivesse rendendo juros, com foco em atingir a meta>"]
   },
   "motivation": {
     "content": "<Mensagem final motivacional e personalizada, que conecta o esforço de não comprar agora com a satisfação de chegar mais rápido ao seu grande sonho, citando a meta pelo nome>"
