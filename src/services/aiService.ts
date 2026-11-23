@@ -6,7 +6,9 @@ export interface InsightData {
     content: string;
   };
   diagnosis: {
-    content: string;
+    expenses: string;
+    free: string;
+    savings: string;
   };
   suggestions: {
     items: string[];

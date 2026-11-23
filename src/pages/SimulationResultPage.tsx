@@ -41,7 +41,8 @@ export default function SimulationResultPage() {
     );
   }
 
-  const { percentOfFreeIncome } = calculatePurchaseImpact(data);
+  const { purchaseFreeIncomePercentage, freeIncome, expensesTotal } =
+    calculatePurchaseImpact(data);
 
   return (
     <main className="mx-auto flex h-full w-full max-w-6xl flex-1 flex-col px-4 py-10 sm:py-12">
@@ -59,15 +60,15 @@ export default function SimulationResultPage() {
           />
           <Card
             icon={Goal}
-            label="Objetivo atual"
-            value={addCurrencySymbol(data.goalValue)}
-            subtitle={data.goal}
+            label="Renda livre"
+            value={addCurrencySymbol(freeIncome)}
+            subtitle="Valor restante após despesas e economias"
           />
           <Card
             icon={ChartPie}
             label="Essa compra consome"
-            value={`${percentOfFreeIncome}%`}
-            subtitle="do que sobra no seu mês!"
+            value={`${purchaseFreeIncomePercentage}%`}
+            subtitle="da sua renda livre!"
             variant="primary"
           />
           <AIInsightCard simulationId={data.id} />
@@ -79,14 +80,17 @@ export default function SimulationResultPage() {
               icon={Wallet}
               label="Renda Mensal"
               value={addCurrencySymbol(data.income)}
-              subtitle="Valor bruto recebido"
+              subtitle="Valor livre recebido"
               variant="ghost"
             />
             <Card
               icon={Receipt}
-              label="Despesas Fixas"
-              value={addCurrencySymbol(data.expenses)}
-              subtitle="Gastos essenciais"
+              label="Despesas"
+              value={addCurrencySymbol(expensesTotal)}
+              subtitle={[
+                `Essenciais: ${addCurrencySymbol(data.expenses)}`,
+                `Dívidas: ${addCurrencySymbol(data.debts)}`,
+              ]}
               variant="ghost"
             />
             <Card

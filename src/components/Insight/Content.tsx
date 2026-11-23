@@ -31,17 +31,15 @@ function OrderedList({ items }: { items: string[] }) {
 const statusStyles = {
   safe: {
     label: "Vale a pena!",
-    className:
-      "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
+    className: "text-green-700 dark:text-green-400",
   },
   attention: {
     label: "Pense um pouco mais",
-    className:
-      "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
+    className: "text-amber-700 dark:text-amber-400",
   },
   danger: {
     label: "Não vale a pena",
-    className: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
+    className: "text-red-700 dark:text-red-400",
   },
 };
 
@@ -55,21 +53,28 @@ export function InsightContent({ insight }: Props) {
     <div className="lg:max-h-full lg:scrollbar-thin lg:[scrollbar-color:var(--border)_transparent] lg:overflow-y-auto lg:pr-2">
       <section className="flex flex-col gap-2">
         <div className="flex flex-col items-start gap-2 sm:flex-row">
-          <span className="text-foreground text-sm font-semibold">
-            Vale a pena?
-          </span>
           {status && (
-            <span
-              className={`w-fit rounded-full px-2.5 py-0.5 text-xs font-semibold ${status.className}`}>
+            <h2
+              className={`w-fit rounded-full py-0.5 text-2xl font-semibold ${status.className}`}>
               {status.label}
-            </span>
+            </h2>
           )}
         </div>
         <Paragraph>{insight.feasibility.content}</Paragraph>
       </section>
       <section>
-        <SectionTitle>📊 Raio-X Financeiro</SectionTitle>
-        <Paragraph>{insight.diagnosis.content}</Paragraph>
+        <SectionTitle>
+          🧾 Avaliação da renda para gastos essenciais
+        </SectionTitle>
+        <Paragraph>{insight.diagnosis.expenses}</Paragraph>
+        <SectionTitle>
+          🛍️ Avaliação da renda livre para desejos e estilo de vida
+        </SectionTitle>
+        <Paragraph>{insight.diagnosis.free}</Paragraph>
+        <SectionTitle>
+          🏦 Avaliação da renda para investimentos ou poupança
+        </SectionTitle>
+        <Paragraph>{insight.diagnosis.savings}</Paragraph>
       </section>
       <section>
         <SectionTitle>💡 Sugestões</SectionTitle>

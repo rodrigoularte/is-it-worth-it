@@ -16,7 +16,7 @@ export function AIInsightCard({ simulationId }: Props) {
 
   return (
     <div className="order-2 col-span-1 row-span-2 h-full lg:order-1 lg:col-span-2">
-      <div className="bg-card h-full rounded-2xl p-6 shadow-[4px_4px_18px_0px_rgba(0,0,0,0.2)] lg:max-h-125">
+      <div className="bg-card h-full rounded-2xl p-6 shadow-[4px_4px_18px_0px_rgba(0,0,0,0.2)] lg:max-h-135">
         {isLoading ? (
           <div className="flex">
             <Skeleton

@@ -4,7 +4,7 @@ interface Props {
   icon: LucideIcon;
   label: string;
   value: string;
-  subtitle: string;
+  subtitle: string | string[];
   variant?: "default" | "primary" | "ghost";
 }
 
@@ -50,10 +50,20 @@ export default function Card({
           {label}
         </span>
       </div>
-      <p className={["text-3xl font-semibold", styles.value].join(" ")}>
+      <p className={["mb-1 text-3xl font-semibold", styles.value].join(" ")}>
         {value}
       </p>
-      <p className={["mt-1 text-sm", styles.subtitle].join(" ")}>{subtitle}</p>
+      {Array.isArray(subtitle) ? (
+        subtitle.map((option, index) => (
+          <p
+            key={`${index}-${option}`}
+            className={["text-sm", styles.subtitle].join(" ")}>
+            {option}
+          </p>
+        ))
+      ) : (
+        <p className={["text-sm", styles.subtitle].join(" ")}>{subtitle}</p>
+      )}
     </div>
   );
 }

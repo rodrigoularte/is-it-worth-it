@@ -19,6 +19,13 @@ export function formatCurrencyMask(value: string): string {
   });
 }
 
+function formatPercentage(value: number): string {
+  return value.toLocaleString("pt-BR", {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  });
+}
+
 export function addCurrencySymbol(value: string): string {
   return `R$ ${value}`;
 }
@@ -30,6 +37,7 @@ export function calculatePurchaseImpact(data: SimulationFormData) {
   const purchaseValue = parseMoney(data.purchaseValue);
   const income = parseMoney(data.income);
   const expenses = parseMoney(data.expenses);
+  const debts = parseMoney(data.debts);
   const savings = parseMoney(data.savings);
   const workHours = parseFloat(data.workHours);
   const monthlyWorkHours = workHours * 4.33;
@@ -42,28 +50,25 @@ export function calculatePurchaseImpact(data: SimulationFormData) {
   const monthlyRate = 0.008; // 0.8%
   const invested1Year = purchaseValue * Math.pow(1 + monthlyRate, 12);
 
-  // Goal Delay
-  const monthsDelayed = savings > 0 ? purchaseValue / savings : 0;
-  const daysDelayed = monthsDelayed * 30;
-
   // Income Percentages
-  const percentOfIncome = (purchaseValue / income) * 100;
-  const freeIncome = income - expenses;
-  const percentOfFreeIncome =
+  const expensesTotal = expenses + debts;
+  const freeIncome = income - (expenses + debts + savings);
+  const purchaseFreeIncomePercentage =
     freeIncome > 0 ? (purchaseValue / freeIncome) * 100 : 100;
+  const freeIncomePercentage = (freeIncome / income) * 100;
+  const expensesPercentage = (expenses / income) * 100;
+  const savingsPercentage = (savings / income) * 100;
 
   return {
     hoursNeeded: hoursNeeded.toFixed(1),
     invested1YearProfit: (invested1Year - purchaseValue).toFixed(2),
-    daysDelayed: Math.round(daysDelayed).toString(),
-    monthsDelayed: monthsDelayed.toFixed(1),
-    percentOfIncome: percentOfIncome.toLocaleString("pt-BR", {
-      minimumFractionDigits: 1,
-      maximumFractionDigits: 1,
-    }),
-    percentOfFreeIncome: percentOfFreeIncome.toLocaleString("pt-BR", {
-      minimumFractionDigits: 1,
-      maximumFractionDigits: 1,
-    }),
+    expensesTotal: formatCurrencyMask(expensesTotal.toFixed(2)),
+    freeIncome: formatCurrencyMask(freeIncome.toFixed(2)),
+    purchaseFreeIncomePercentage: formatPercentage(
+      purchaseFreeIncomePercentage,
+    ),
+    freeIncomePercentage: formatPercentage(freeIncomePercentage),
+    expensesPercentage: formatPercentage(expensesPercentage),
+    savingsPercentage: formatPercentage(savingsPercentage),
   };
 }

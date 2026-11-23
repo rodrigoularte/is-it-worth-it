@@ -1,11 +1,11 @@
 import {
   CircleDollarSign,
   Clock,
+  CreditCard,
   PiggyBank,
   Receipt,
   ShoppingCart,
   Sparkles,
-  Target,
   Wallet,
 } from "lucide-react";
 
@@ -37,29 +37,6 @@ export const formSteps = [
       isCurrency: true,
     },
   },
-  // {
-  //   id: "payment",
-  //   icon: CreditCard,
-  //   stepTitle: "Pagamento",
-  //   stepQuestion: "Como pretende pagar esta compra?",
-  //   inputProps: {
-  //     type: "text",
-  //     placeholder: "ex: À vista, Parcelado em 6x",
-  //     maxLength: 50,
-  //   },
-  // },
-  // {
-  //   id: "motivation",
-  //   icon: HelpCircle,
-  //   stepTitle: "Motivação",
-  //   stepQuestion: "Qual a real necessidade desta compra agora?",
-  //   inputProps: {
-  //     type: "text",
-  //     placeholder:
-  //       "ex: Necessidade real, Desejo do momento, ou Estou na dúvida",
-  //     maxLength: 50,
-  //   },
-  // },
   {
     id: "income",
     icon: Wallet,
@@ -68,20 +45,6 @@ export const formSteps = [
     inputProps: {
       type: "text",
       placeholder: "ex: 3.000,00",
-      prefix: "R$",
-      maxLength: 12,
-      isCurrency: true,
-    },
-  },
-  {
-    id: "expenses",
-    icon: Receipt,
-    stepTitle: "Despesas Fixas",
-    stepQuestion:
-      "Aproximadamente quanto você gasta por mês com contas e despesas essenciais?",
-    inputProps: {
-      type: "text",
-      placeholder: "ex: 2.000,00",
       prefix: "R$",
       maxLength: 12,
       isCurrency: true,
@@ -100,24 +63,28 @@ export const formSteps = [
     },
   },
   {
-    id: "goal",
-    icon: Target,
-    stepTitle: "Sua Meta",
-    stepQuestion: "Qual o seu maior sonho ou meta atual?",
+    id: "expenses",
+    icon: Receipt,
+    stepTitle: "Despesas Fixas",
+    stepQuestion:
+      "Aproximadamente quanto você gasta por mês com contas e despesas essenciais?",
     inputProps: {
       type: "text",
-      placeholder: "ex: Viagem para o Japão",
-      maxLength: 100,
+      placeholder: "ex: 2.000,00",
+      prefix: "R$",
+      maxLength: 12,
+      isCurrency: true,
     },
   },
   {
-    id: "goalValue",
-    icon: CircleDollarSign,
-    stepTitle: "Sua Meta",
-    stepQuestion: "Quanto custa realizar esse sonho ou meta?",
+    id: "debts",
+    icon: CreditCard,
+    stepTitle: "Renda comprometida",
+    stepQuestion:
+      "Quanto da renda é gasto com o pagamento de parcelas, empréstimos e financiamentos?",
     inputProps: {
       type: "text",
-      placeholder: "ex: 15.000",
+      placeholder: "ex: 500,00",
       prefix: "R$",
       maxLength: 12,
       isCurrency: true,
@@ -127,7 +94,8 @@ export const formSteps = [
     id: "savings",
     icon: PiggyBank,
     stepTitle: "Economia Mensal",
-    stepQuestion: "Quanto você consegue guardar por mês para essa meta?",
+    stepQuestion:
+      "Quanto você consegue guardar por mês para poupança ou investimento?",
     inputProps: {
       type: "text",
       placeholder: "ex: 300,00",
