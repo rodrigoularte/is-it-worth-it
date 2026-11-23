@@ -1,5 +1,3 @@
-import { GoogleGenAI } from "@google/genai";
-
 export interface InsightData {
   feasibility: {
     status: "safe" | "attention" | "danger";
@@ -21,27 +19,20 @@ export interface InsightData {
   };
 }
 
-const API_KEY = String(import.meta.env.VITE_GEMINI_API_KEY);
-const MODEL_NAME = "gemini-3.5-flash-lite";
-
-const callGeminiAPI = async (prompt: string) => {
-  const ai = new GoogleGenAI({
-    apiKey: API_KEY,
+export const getInsight = async (prompt: string): Promise<InsightData> => {
+  const response = await fetch("/api/generate-insight", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ prompt }),
   });
 
-  const interaction = await ai.interactions.create({
-    model: MODEL_NAME,
-    input: prompt,
-  });
-
-  if (!interaction.output_text) {
-    throw new Error("Failed to get response from Gemini API");
+  if (!response.ok) {
+    throw new Error("Failed to generate insight");
   }
 
-  return interaction.output_text;
-};
+  const data: { result: string } = await response.json();
 
-export const getInsight = async (prompt: string) => {
-  const response = await callGeminiAPI(prompt);
-  return JSON.parse(response) as InsightData;
+  return JSON.parse(data.result) as InsightData;
 };
