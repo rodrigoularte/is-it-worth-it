@@ -41,14 +41,19 @@ export default function SimulationResultPage() {
     );
   }
 
-  const { purchaseFreeIncomePercentage, freeIncome, expensesTotal } =
-    calculatePurchaseImpact(data);
+  const {
+    purchaseFreeIncomePercentage,
+    freeIncome,
+    expensesTotal,
+    expensesPercentage,
+    savingsPercentage,
+  } = calculatePurchaseImpact(data);
 
   return (
     <main className="mx-auto flex h-full w-full max-w-6xl flex-1 flex-col px-4 py-10 sm:py-12">
       <PageHero
         title="Resultado da sua simulação"
-        subtitle="Com base no seu perfil financeiro e objetivos."
+        subtitle="Com base no seu perfil financeiro."
       />
       <div>
         <div className="mb-6 grid grid-cols-1 gap-4 lg:grid-cols-3">
@@ -71,7 +76,13 @@ export default function SimulationResultPage() {
             subtitle="da sua renda livre!"
             variant="primary"
           />
-          <AIInsightCard simulationId={data.id} />
+          <AIInsightCard
+            simulationId={data.id}
+            percentages={{
+              expenses: expensesPercentage,
+              savings: savingsPercentage,
+            }}
+          />
           <div className="bg-card order-1 row-span-2 rounded-2xl p-6 shadow-[4px_4px_18px_0px_rgba(0,0,0,0.2)] lg:order-2">
             <h2 className="text-foreground mb-1 text-2xl font-semibold sm:text-3xl">
               Resumo

@@ -67,8 +67,8 @@ export function calculatePurchaseImpact(data: SimulationFormData) {
     purchaseFreeIncomePercentage: formatPercentage(
       purchaseFreeIncomePercentage,
     ),
-    freeIncomePercentage: formatPercentage(freeIncomePercentage),
-    expensesPercentage: formatPercentage(expensesPercentage),
-    savingsPercentage: formatPercentage(savingsPercentage),
+    freeIncomePercentage,
+    expensesPercentage,
+    savingsPercentage,
   };
 }

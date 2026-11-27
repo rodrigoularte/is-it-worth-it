@@ -15,7 +15,7 @@ const RESPONSE_SCHEMA = `{
   },
   "diagnosis": {
     "expenses": "<Análise da porcentagem das despesas sobre a renda. Se for até 50% da renda mensal, a análise deve ser positiva. Se for entre 50% e 60%, a análise deve indicar que é necessário uma atenção maior com os gastos. Se for acima de 60%, a análise deve indicar preocupação com o equilíbrio financeiro.>",
-    "free": "<Análise dos gastos livres. Analisar se com uma parte do valor da renda livre é possível guardar mais ou então se dá para utilizar para o pagamento de parcelas, empréstimos e financiamentos.>",
+    "free": "<Análise dos gastos livres. Analisar se com uma parte do valor da renda livre é possível economizar/investir mais ou então se dá para utilizar para o pagamento de parcelas, empréstimos e financiamentos.>",
     "savings": "<Análise da porcentagem da economia na renda. Se for 20% da renda mensal ou mais, a análise deve ser positiva. Se for entre 10% e 19%, a análise deve indicar que o usuário deve economizar mais para chegar a pelo menos 20%. Se for menor do que 10%, a análise deve indicar o quanto isso pode prejudicar o futuro e o alcance das metas.>"
   },
   "suggestions": {

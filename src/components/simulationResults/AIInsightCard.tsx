@@ -9,9 +9,13 @@ import { Error } from "../Insight/Error";
 
 interface Props {
   simulationId: string;
+  percentages: {
+    expenses: number;
+    savings: number;
+  };
 }
 
-export function AIInsightCard({ simulationId }: Props) {
+export function AIInsightCard({ simulationId, percentages }: Props) {
   const { insight, isLoading, error, fetchInsight } = useInsight(simulationId);
 
   return (
@@ -35,7 +39,9 @@ export function AIInsightCard({ simulationId }: Props) {
             onRetry={() => fetchInsight(simulationId)}
           />
         ) : (
-          insight && <InsightContent insight={insight} />
+          insight && (
+            <InsightContent insight={insight} percentages={percentages} />
+          )
         )}
       </div>
     </div>
